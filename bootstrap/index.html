@@ -1,0 +1,176 @@
+<html>
+	<head>
+		<link type="text/css"rel="stylesheet" href="stylesheet.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+		<title> Comment Post </title>
+		<script>
+			function validate(){
+				//Name Validation
+				var name = document.getElementById("name");
+				var blank_field = false;
+				if(name.value ==""){
+					name.style.backgroundColor ="pink";
+					blank_field = true;
+				}else{
+					name.style.backgroundColor = "lightgreen";
+				}
+				//Textarea validation
+				var textarea = document.getElementById("textarea");
+				if(textarea.value ==""){
+					textarea.style.backgroundColor ="pink";
+					blank_field = true;
+				}else{
+					textarea.style.backgroundColor="lightgreen";
+				}
+				//Title validation
+				var titlebox = document.getElementById("titlebox")
+				if(titlebox.value==""){
+					titlebox.style.backgroundColor = "pink";
+					blank_field = true;
+				} else {
+					titlebox.style.backgroundColor="lightgreen";
+				}
+				//Drop Down Menu Validation
+				var text_color = document.getElementById("text_color");
+				var bg_color = document.getElementById("bg_color");
+				if(text_color.value=="Choose A Color"){
+					text_color.style.border="2px solid red";
+					blank_field=true;
+				} else if (bg_color.value=="Choose A Color"){
+					bg_color.style.border="2px solid red";
+					blank_field=true;
+				} else {
+					text_color.style.border ="none";
+					bg_color.style.border ="none";
+				}
+				//Radio Button Validation
+				var icon = document.getElementsByName("icon");
+				var radiobtns = document.getElementById("radiobtns");
+				var blank_radio = true;
+				for(var i=0; i<icon.length; i++){
+					if(icon[i].checked==true){
+						blank_radio = false;
+					}
+				}
+				if(blank_radio == true){
+					radiobtns.style.border="2px solid red";
+					blank_field=true;
+				} else {
+					radiobtns.style.border ="none";
+				}
+				//Error Message
+				var message = document.getElementById("message");
+				if(blank_field==true){
+					message.innerHTML = "<h3 style='color:red;'>You missed a spot!</h3>";
+				}else{
+					message.innerHTML = "";
+				}
+				add();
+			}//end function validate
+			var array =[];
+			function add(){
+				/* Variables*/
+				var name = document.getElementById("name");
+				var title = document.getElementById("titlebox");
+				var comment = document.getElementById("textarea");
+				var icon = document.getElementsByName("icon");
+				var icon_value;
+				var text_color = document.getElementById("text_color");
+				var bg_color = document.getElementById("bg_color");
+				for(var i=0; i< icon.length; i++){
+					if(icon[i].checked == true){
+						icon_value = icon[i].value;
+					}
+				}
+				/* all variables and loops go above this */
+				var storage ={name:name.value, title:title.value, comment:comment.value, icon:icon_value,text_color: text_color.value, bg_color: bg_color.value};
+				array.push(storage);
+				show();
+			}//end function add
+			function show(){
+				var display = document.getElementById("display");
+				var post="";
+				for(var i=0; i<array.length; i++){
+					post +="<div id='usercomment' style='background-color:"+array[i].bg_color+";'>";
+					post+="<input type='checkbox' onclick='gone("+i+");'/>"
+					post +="<span style='color:"+array[i].text_color+";'>";
+					post += "<img src='"+array[i].icon+"'class='icon'/>";
+					post += "<strong>"+array[i].name+"</strong><br>";
+					post += "<strong>"+array[i].title+"</strong><br>";
+					post += "<strong>"+array[i].comment+"</strong><br>";
+					post +="</span>";
+					post +="</div>";
+				}
+				display.innerHTML = post;
+			}// end function show
+			function gone(index){
+				array.splice(index, 1);
+				show();
+			}
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12 col-sm-4" id="logo">
+					<img class="img-responsive" src="https://i.pinimg.com/originals/15/40/fc/1540fc851ed4ddd90a648a5db03aaff0.jpg"/>
+				</div>
+			</div><!--end logo row -->
+			<div class"row">
+				<div class="col-xs-12" id="menu">
+					<ul class="nav nav-tabs">
+						<li><a href="#">HOME</a></li>
+						<li><a href="#">Devotionals</a></li>
+						<li><a href="#">MEET THE GIRLS</a></li>
+					</ul>
+				</div>
+			</div><!-- end menu row -->
+			<div class="row">
+				<div class="col-xs-12 col-sm-8" id="comments">COMMENTS
+					<div id="form" class="col-xs-12 col-sm-4">
+						<header id="header"> Leave a Comment </header>
+						<div id="message"></div>
+						<form class="form-inline">
+							<label>Name:</label>
+							<input type="text" class="form-control" id="name" placeholder="Enter Name Here">
+							<label id="color">Color</label>
+							<select id="text_color" class="form-control">
+								<option>Choose A Color</option>
+								<option>Red</option>
+								<option>Pink</option>
+								<option>Purple</option>
+								<option>Blue</option>
+							</select>
+						</form>
+						<form class="form-horizontal">
+							<label class="control-label"> Title: </label>
+							<input type="text" class="form-control" id="titlebox" placeholder="Enter Comment Title">
+							<label> Background Color: </label>
+							<select id="bg_color" class="form-control">
+								<option>Choose A Color</option>
+								<option>White</option>
+								<option>Black</option>
+								<option>Pink</option>
+								<option>Light Blue</option>
+							</select>
+						</form>
+						<form class="form-inline" id="radiobtns">
+							<label class="control-label"> Icons: </label>
+							<input type="radio" name="icon" value="butterfly_purple.png">
+							<img src="butterfly_purple.png" class="icon" />
+							<input type="radio" name="icon" value="phppg.png">
+							<img src="phppg.png" class="icon" />
+							<input type="radio" name="icon" value="flower.png">
+							<img src="flower.png" class="icon" />
+							<input type="radio" name="icon" value="map_app.png">
+							<img src="map_app.png" class="icon" />
+						</form>
+						<label class="control-label"> Comment: </label> <br>
+						<textarea id="textarea" class="form-control" row="8"></textarea> <br>
+						<input class="btn btn-default" type="button" value="Submit Comment" onclick="validate()">
+					</div><!-- end form id row -->
+				<div id="display"></div>
+			</div><!-- end comments row -->
+		</div><!--end container div -->
+</body>
+</html>

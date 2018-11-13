@@ -1,0 +1,112 @@
+<html>
+	<head>
+		<title> JavaScript Practice </title>
+		<script>
+			function start(){
+				var age = 33;
+				var name = "Charles Xavier"
+				alert(name + " is " + age);
+			}
+			function math(){
+				var math = 144*5324-53/2+123;
+				alert(math);
+			}
+			function question(){
+				var question = prompt("What is my favorite color?")
+				if(question == "blue" || "green"){
+					alert("You know me very well, you are a friend.");
+				} 
+				else{
+					alert("Talk to me more, you don't know my favorite color.")
+				}
+			}
+			function rate(){
+				var q = prompt("How much do you like JavaScript 1-10?")
+				if(q<4){
+					alert("I'll try and make things more exciting!");
+				} else if(q<7) {
+					alert("Just wait, it gets better!");
+				}else {
+					alert("You're going to love the stuff coming up!");
+				}
+			}
+			function change(){
+				var edit = document.getElementById("find");
+				edit.innerHTML = "This Page is Full of Magic!";
+			}
+			var pass = 1;
+			function toggle(){
+				var twitch = document.getElementById("rotate");
+				if(pass == 1){
+					twitch.innrHTML ="You didn't see anything...";
+					pass=2
+				}else if (pass == 2){
+					twitch.innerHTML = "<img src='https://simplycodingcourses.com/files/sclogo.png' />";
+					pass = 3;
+				}else{
+					twitch.innerHTML = "This text may change, even into a picture";
+					pass = 1;
+				}
+			}//end function
+			function count(){
+				var count=0;
+				while(count<10){
+					alert(count);
+					count = count + 1;
+				}
+			}
+			function numbers(){
+				for(var i=0; i<10; i+=2){
+					alert(i);
+				}
+			}
+			var games =["Mario Kart", "Mario Bros.", "7 Wonders", "5 Minute Dungeon", "Citadel"];
+			var sentence ="peter piper picked a peck of pickled peppers, how many pickled peppers did peter piper pick?";
+			var array = [];
+			for (var i = 0; i < sentence.length; i++){
+				if(sentence[i] =="p"){
+					array.push(sentence[i]);
+				}
+			}
+			var book = {title:"Arrived", author:"Jerry B. Jenkins & Tim LaHaye", price: "on kindle, $7.99", summary:" The Young Trib Force makes their final attempts to reach those not saved before meeting Christ face-to-face."}
+			function obj(){
+				var ask = prompt("What do you want to know about my book? (title, author, price or summary):");
+				alert("This book's " + ask + " is: " + book[ask]);
+			}
+			function morph(){
+				var box = document.getElementById("box");
+				box.style.backgroundColor = "blue";
+				box.style.border = "12px ridge brown";
+				box.innerHTML = "You didn't see anything . . . did you?";
+				box.style.color ="white";
+			}
+		</script>
+		<style>
+			#box{
+				color:#660066;
+				background-color:#ffccff;
+				height:250px;
+				width:250px;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			There are <script>document.writeln(array.length);</script>p's in the sentence: "<script>document.writeln(sentence);</script>"
+		</div>
+		A game I like is, <span><script>document.writeln(games[4]);</script></span>
+		<div id="rotate">This text may change, even into a picture!</div>
+		<div id="find">My JavaScript Practice Page</div>
+		<input type="button" onclick="start()" value="Press Me">
+		<input type="button" onclick="math()" value="Math Time">
+		<input type="button" onclick="question()" value="Favorite Color">
+		<input type="button" onclick="rate()" value="JavaScript Rating">
+		<input type="button" onclick="change()" value="Magic Button">
+		<input type="button" onclick="toggle()" value="Change Button">
+		<input type="button" onclick="count()" value="While Loop">
+		<input type="button" onclick="numbers()" value="For Loop">
+		<input type="button" onclick="obj()" value="Book Q&A">
+		<input type="button" onclick="morph()" value="Change the Box">
+		<div id="box">You should be seeing some change in the near future!</div>
+	</body>
+</html>
